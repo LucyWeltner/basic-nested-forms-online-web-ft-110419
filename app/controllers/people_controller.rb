@@ -1,11 +1,18 @@
 class PeopleController < ApplicationController
   def new
     @person = Person.new
+    2.times do |t|
+      @person.addresses.build
+    end 
   end
 
   def create    
-    Person.create(person_params)
-    redirect_to people_path
+    @person = Person.new(person_params)
+    if @person.save
+      redirect_to people_path
+    else 
+      render :'people/new'
+    end
   end
 
   def index
@@ -15,6 +22,6 @@ class PeopleController < ApplicationController
   private
 
   def person_params
-    params.require(:person).permit(:name)
+    params.require(:person).permit(:name, addresses_attributes: [:street_address_1, :street_address_2, :city, :state, :zipcode, :address_type])
   end
 end

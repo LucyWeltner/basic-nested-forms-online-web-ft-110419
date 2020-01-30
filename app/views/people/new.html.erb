@@ -1,4 +1,31 @@
+<h1>Create a Person</h1>
 <%= form_for @person do |f| %>
-  <%= f.text_field :name %> <br /><br />
+	<p><%= f.label :name %>
+  	<%= f.text_field :name %></p>
+  	 <% number = 1 %>
+  	<%= f.fields_for :addresses do |address_f| %>
+  	<h2> Address <%= number %></h2>
+  	<% number += 1 %> 
+  	<p><%= address_f.label :street_address_1 %>
+  		<%= address_f.text_field :street_address_1 %></p>
+  	<p><%= address_f.label :street_address_2 %>
+  		<%= address_f.text_field :street_address_2 %></p>
+  	<p><%= address_f.label :city %>
+  		<%= address_f.text_field :city %></p>
+  	<p><%= address_f.label :state %>
+  		<%= address_f.text_field :state %></p>
+  	<p><%= address_f.label :zipcode %>
+  		<%= address_f.text_field :zipcode %></p>
+  	<p><%= address_f.label :address_type %>
+  		<%= address_f.text_field :address_type %></p>
+  	<% end %>
  <%= f.submit %>
 <% end %>
+
+<!-- 
+    t.string   "street_address_1"
+    t.string   "street_address_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.string   "address_type" -->
